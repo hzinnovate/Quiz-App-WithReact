@@ -6,7 +6,7 @@ class Quiz extends Component{
         super();
         this.state = {
             ans: 0,
-            time: 1000
+            time: 1000,
         }
     }
     static getDerivedStateFromProps(props){
@@ -20,16 +20,22 @@ class Quiz extends Component{
     }
 
     render(){
-        const {quiz, ans} = this.state
+        const {quiz, ans, checked} = this.state
         return(
-            <div>
+            <div style={{width: '80%'}}>
             <h1>Quiz</h1>
+            <div style={{textAlign: 'left'}}>
+
                 <h2>Question :  {quiz.question}</h2>
-                <li>{quiz.correct_answer}<input type='radio' name='option' value='1' onClick={(e)=>this.setState({ans: e.target.value})} /></li>
+                <ol>
+
+                <li><input type='radio' name='option' value='1' defaultChecked={false} onClick={(e)=>this.setState({ans: e.target.value})} /> &nbsp; &nbsp; &nbsp; {quiz.correct_answer}</li>
                 {quiz.incorrect_answers.map((e,i)=>{
-                    return(<li key={i}>{e}<input type='radio' name='option' value='0' onClick={(e)=>this.setState({ans: e.target.value})} /></li>)
+                    return(<li key={i}><input type='radio' name='option' value='0' defaultChecked={false} onClick={(e)=>this.setState({ans: e.target.value})}  /> &nbsp; &nbsp; &nbsp; {e}</li>)
                 })}
-                <button onClick={()=>this.next()} >Next</button>
+                </ol>
+                <button style={{marginLeft: '100px', width: '100px'}} onClick={()=>this.next()} >Next</button>
+                </div>
             </div>
         )
     }

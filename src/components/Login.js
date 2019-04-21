@@ -30,7 +30,8 @@ loginbtn(){
     render(){
         return(
             <div>
-                <h2>Login</h2>
+                <h2>Login for Quiz</h2>
+                <p> email: 'abc@xyz.com' <br /> password: '123456789'</p>
                 <input onChange={(e)=>this.email(e)} type='email' placeholder='email' />
                 <br/>
                 <input onChange={(e)=>this.password(e)} type='password' placeholder='password' />

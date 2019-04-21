@@ -6,29 +6,37 @@ class Timer extends Component{
         this.state = {
             totalTime: 0,
             time: 0,
+            timer: '',
         }
     }
+componentDidMount(){
+const {time, totalTime} = this.state
+var newTime = 0;
+    this.state.timer = setInterval(() => {
+    var get = new Date(newTime)
+    var minute = get.getMinutes()
+    var seconds = get.getSeconds()
+    newTime = parseInt(newTime) + 1000
+    // console.log(newTime)
+    this.setState({
+        totalTime: minute + ':' + seconds,
+        time: newTime
+    })
+}, 1000)
 
-time(){
-    const {time, totalTime} = this.state
-  var counter = setInterval(() => {
-      var newTime = time + 1000
-        var get = new Date(newTime)
-            this.setState({
-                totalTime: get,
-                time: newTime
-            })
-    }, 1000)
-    return(
-        <h1>{totalTime.getMinutes}</h1>
-    )
+}
+componentWillUnmount(){
+    clearInterval(this.state.timer)
+    this.props.time(this.state.time)
 }
 
+
     render(){
-        const {totalTime} = this.state
+        const {totalTime, time} = this.state
+        // console.log(time)
         return(
             <div>
-                {this.time}
+                <p>Time Count : {totalTime}</p>
             </div>
         )
     }
